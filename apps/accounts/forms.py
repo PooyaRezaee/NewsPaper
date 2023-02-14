@@ -7,6 +7,11 @@ class CustomUserCreationForm(UserCreationForm):
         model = User
         fields = UserCreationForm.Meta.fields + ("age","level")
 
+class SingUpForm(UserCreationForm):
+    class Meta(UserCreationForm):
+        model = User
+        fields = UserCreationForm.Meta.fields + ("age",)
+
 class CustomUserChangeForm(UserChangeForm):
     class Meta:
         model = User
