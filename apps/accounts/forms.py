@@ -10,7 +10,7 @@ class CustomUserCreationForm(UserCreationForm):
 class SingUpForm(UserCreationForm):
     class Meta(UserCreationForm):
         model = User
-        fields = UserCreationForm.Meta.fields + ("age",)
+        fields = UserCreationForm.Meta.fields + ("age","email")
 
 class CustomUserChangeForm(UserChangeForm):
     class Meta:
