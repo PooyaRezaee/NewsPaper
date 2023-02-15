@@ -25,7 +25,17 @@ class ArticleUpdateView(UpdateView):
     fields = ("title","body")
     template_name = "article/article_edit.html"
 
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        queryset = queryset.filter(author=self.request.user)
+        return queryset
+
 class ArticleDeleteView(DeleteView):
     model = Article
     template_name = "article/article_delete.html"
     success_url = reverse_lazy("article:article_list")
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        queryset = queryset.filter(author=self.request.user)
+        return queryset
