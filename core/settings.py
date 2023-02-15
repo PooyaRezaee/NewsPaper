@@ -31,6 +31,10 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    # Over Wirted Account
+    'apps.accounts.apps.AccountsConfig',
+
+    # Defualt
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -44,7 +48,6 @@ INSTALLED_APPS = [
 
     # Local
     'apps.articles.apps.ArticlesConfig',
-    'apps.accounts.apps.AccountsConfig',
     'apps.pages.apps.PagesConfig',
 ]
 
