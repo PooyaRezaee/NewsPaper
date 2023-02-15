@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+    Articles
+{% endblock title %}
+    
+
+
+{% block body %}
+    <div class="text-blue-900 py-8">
+        <div class="container mx-auto">
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <h1 class="text-2xl font-bold mb-4">Article List</h1>
+                <ul class="divide-y divide-gray-200">
+                    {% for article in articles %}
+                        <hr>
+                        <li class="py-4">
+                            <a href="#" class="block hover:underline">
+                                <h2 class="text-lg font-bold">{{ article.title }}</h2>
+                                <p class="text-gray-700 mt-2">{{ article.body|truncatechars:100 }}</p>
+                            </a>
+                        </li>
+                    {% empty %}
+                        <p>No articles found.</p>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endblock body %}
+    
