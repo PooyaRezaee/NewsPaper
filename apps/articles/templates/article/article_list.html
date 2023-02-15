@@ -16,7 +16,7 @@
                     {% for article in articles %}
                         <hr>
                         <li class="py-4">
-                            <a href="#" class="block hover:underline">
+                            <a href="{{ article.get_absolute_url }}" class="block hover:underline">
                                 <h2 class="text-lg font-bold">{{ article.title }}</h2>
                                 <p class="text-gray-700 mt-2">{{ article.body|truncatechars:100 }}</p>
                             </a>

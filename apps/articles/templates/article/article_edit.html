@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load tailwind_filters %}
+
+
+{% block title %}
+    Articles
+{% endblock title %}
+    
+
+
+{% block body %}
+    <div class="py-8">
+        <div class="container mx-auto text-white">
+            <form method="POST">
+                {% csrf_token %}
+                {{ form | crispy }}
+                <input type="submit" class="text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 font-medium rounded-lg px-5 py-2.5 text-center m-auto" value="Edit">
+            </form>
+        </div>
+    </div>
+{% endblock body %}
+    
