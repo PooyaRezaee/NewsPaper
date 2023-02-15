@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     # 3rd Party
     "crispy_forms",
     "crispy_tailwind",
+    "django.contrib.humanize",
 
     # Local
     'apps.articles.apps.ArticlesConfig',

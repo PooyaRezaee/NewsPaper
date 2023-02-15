@@ -1,8 +1,10 @@
 from django.shortcuts import render
-from django.views.generic import ListView,DetailView,DeleteView,UpdateView,CreateView
-from .models import Article
+from django.views.generic import ListView,DetailView,DeleteView,UpdateView,CreateView,FormView
+
+from .models import Article,Comment
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
+from .forms import CommentForm
 
 __all__ = [
     'ArticleListView',
@@ -21,6 +23,23 @@ class ArticleDetailView(DetailView):
     model = Article
     template_name = "article/article_detail.html"
     context_object_name = 'article'
+
+    def post(self, request, *args, **kwargs):
+        form = CommentForm(request.POST)
+
+        if form.is_valid():
+            cd = form.cleaned_data
+            Comment.objects.create(comment=cd['comment'],author=request.user,article=self.get_object())
+
+        return super().get(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        if self.request.user.is_authenticated:
+            context["form"] = CommentForm()
+        context["comments"] = Comment.objects.filter(article=context['article'])
+        return context
+
 
 class ArticleUpdateView(UpdateView):
     model = Article
