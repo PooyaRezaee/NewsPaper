@@ -1,13 +1,15 @@
 from django.shortcuts import render
-from django.views.generic import ListView,DetailView,DeleteView,UpdateView
+from django.views.generic import ListView,DetailView,DeleteView,UpdateView,CreateView
 from .models import Article
 from django.urls import reverse_lazy
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 __all__ = [
     'ArticleListView',
     'ArticleDetailView',
     'ArticleUpdateView',
     'ArticleDeleteView',
+    'ArticleCreateView'
 ]
 
 class ArticleListView(ListView):
@@ -39,3 +41,16 @@ class ArticleDeleteView(DeleteView):
         queryset = super().get_queryset()
         queryset = queryset.filter(author=self.request.user)
         return queryset
+
+class ArticleCreateView(LoginRequiredMixin,CreateView):
+    model = Article
+    template_name = "article/article_new.html"
+    fields = (
+    "title",
+    "body",
+    "category",
+    )
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
